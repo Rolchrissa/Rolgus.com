@@ -18,8 +18,11 @@ class App extends React.Component {
     render() {
         return (
             <div id="app">
-                <NavBar/>
+                <NavBar />
                 <Router>
+                    <Link to="/Portales">Portales</Link><br/>
+                    <Link to="/RestBlocks">RestBlocks</Link><br />
+                    <Link to="/Circulos">Circulos</Link><br />
                     <Route exact path="/" render={() => {
                         document.title = "Rolgus | Minecraft";
                         return (<Home />);

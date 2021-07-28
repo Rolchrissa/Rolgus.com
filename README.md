@@ -1,3 +1,3 @@
 # Rolgus WebSite
 
-[Rolgus.com](https://Rolgus.com])
+[Rolgus.com](https://Rolgus.com)

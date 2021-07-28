@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+
+#navbar{
+    display: flex;
+    flex-basis: 100%;
+    min-width: 280px;
+    background: #005C45;
+    justify-content: space-around;
+    padding: 5px;
+    position: sticky;
+}
+#navbar *{
+    align-self: center;
+    cursor: pointer;
+    color: #ddd;
+    font-size: 250%;
+    height: 45px;
+}
+#navbar i{
+    display: flex;    
+}
+#navbar i::before{
+    align-self: center;
+}
+

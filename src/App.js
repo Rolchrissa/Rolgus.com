@@ -22,15 +22,23 @@ class App extends React.Component {
                 
                 <Router>
                     <Route exact path="/" render={() => {
+                        document.title = "Rolgus | Minecraft";
                         return (<Home />);
+
                         }}/>
                     <Route path="/Portales" render={() => {
+                        document.title = "Portales | Rolgus";
+
                         return (<Portales/>)
                     }} />
                     <Route path="/RestBlocks" render={() => {
+                        document.title = "Diferencia | Rolgus";
+
                         return (<RestBlocks/>)
                     }} />
                     <Route path="/Circulos" render={() => {
+                        document.title = "Circulos | Rolgus";
+
                         return (<Circulos/>)
                     }} />
                 </Router>

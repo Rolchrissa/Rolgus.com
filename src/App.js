@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.js';
 import './App.css'
 import NavBar from './components/NavBar';
@@ -7,38 +7,50 @@ import Home from './components/Home';
 import Portales from './components/Portales';
 import Circulos from './components/Circulos';
 import RestBlocks from './components/RestBlocks.js';
-// import Calculadora from './components/Calculadora'
-
+import Menu from './components/MenuDesp'
+var hola = '';
 class App extends React.Component {
-
-
-
+    state = {
+        menu: false
+    }
+    setMenu(estado) {
+        // let change = {
+        //     menu: estado
+        // }
+        hola = estado;
+        console.log((hola));
+        console.log((this.state.menu));
+        this.setState({
+            menu: estado
+        })
+    }
 
 
     render() {
         return (
             <div id="app">
-                <NavBar />
                 <Router>
-                    <Link to="/Portales">Portales</Link><br/>
-                    <Link to="/RestBlocks">RestBlocks</Link><br />
-                    <Link to="/Circulos">Circulos</Link><br />
+                    <NavBar setMenu={this.setMenu.bind(this)} menuState={this.state.menu}/>
+                    {this.state.menu ? <Menu setMenu={this.setMenu.bind(this)}/> : ''}
                     <Route exact path="/" render={() => {
                         document.title = "Rolgus | Minecraft";
+                        
                         return (<Home />);
                         }}/>
-                    <Route path="/Portales" render={() => {
+                    <Route exact path="/Portales" render={() => {
                         document.title = "Portales | Rolgus";
 
                         return (<Portales/>)
                     }} />
-                    <Route path="/RestBlocks" render={() => {
-                        document.title = "Diferencia | Rolgus";
+                    <Route exact path="/RestBlocks" render={() => {
+                        document.title = "Distancia | Rolgus";
                         return (<RestBlocks/>)
                     }} />
-                    <Route path="/Circulos" render={() => {
+                    <Route exact path="/Circulos" render={() => {
                         document.title = "Circulos | Rolgus";
-                        return (<Circulos/>)
+                        return (<div>
+                            <Circulos />
+                        </div>)
                     }} />
                 </Router>
 

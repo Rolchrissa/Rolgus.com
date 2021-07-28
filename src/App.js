@@ -19,12 +19,10 @@ class App extends React.Component {
         return (
             <div id="app">
                 <NavBar/>
-                
                 <Router>
                     <Route exact path="/" render={() => {
                         document.title = "Rolgus | Minecraft";
                         return (<Home />);
-
                         }}/>
                     <Route path="/Portales" render={() => {
                         document.title = "Portales | Rolgus";
@@ -33,12 +31,10 @@ class App extends React.Component {
                     }} />
                     <Route path="/RestBlocks" render={() => {
                         document.title = "Diferencia | Rolgus";
-
                         return (<RestBlocks/>)
                     }} />
                     <Route path="/Circulos" render={() => {
                         document.title = "Circulos | Rolgus";
-
                         return (<Circulos/>)
                     }} />
                 </Router>

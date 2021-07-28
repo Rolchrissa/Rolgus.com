@@ -151,9 +151,9 @@ export class RestBlocks extends Component {
                         name="Limpiar"
                         styles={{ flexBasis: "25%" }}></Button>
                     
-                    {/* <Button click={this.restCoods}
+                    <Button click={this.restCoods}
                         name="Restar"
-                        styles={{ flexBasis: "50%" }}></Button> */}
+                        styles={{ flexBasis: "50%" }}></Button>
                     
                 </div>
                 <div id="calculadora__res">

@@ -1,0 +1,14 @@
+#error404{
+    color: #005C45;
+    font-weight: 900;
+    font-size: 200%; 
+    margin-top: 50%;
+}
+.calc__404{
+    justify-content:center;
+    align-items: center;
+}
+.calc__404 div{
+    margin:  auto;
+
+}

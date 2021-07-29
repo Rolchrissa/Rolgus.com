@@ -3,27 +3,30 @@ import { Link } from 'react-router-dom';
 import './Calculadora.css'
 import Button from './Boton'
 import './Home.css'
+import depflags from '../flags.json'
 
 class Home extends React.Component {
     render() {
+        document.title = "Rolgus | Minecraft";
+
         return (
-            <div id="calculadora" className="home__home">
-                <h2 id="home__home">Rolgus Tool-Box</h2>
-                    <div onClick={this.onClick} className="boton__home">
-                <Link to="/Portales">
-                        <Button name="Enlazar Portales" />
-                </Link>
+            <div id="calculadora">
+                <h2 id="home__h2">Rolgus Tool-Box</h2>
+                    <div  className="boton__home">
+                        <Link to="/Portales" onClick={this.onClick}>
+                            <Button name="Enlazar Portales" />
+                        </Link>
                     </div>
-                    <div onClick={this.onClick} className="boton__home">
-                <Link to="/RestBlocks">
-                        <Button name="Distancias" />
-                </Link>
+                    <div  className="boton__home">
+                        <Link to="/RestBlocks" onClick={this.onClick}>
+                            <Button name="Distancias" />
+                        </Link>
                     </div>
-                    <div onClick={this.onClick} className="boton__home">
-                <Link to="/Circulos">
-                        <Button name="Circulos(en desarrollo)" />
-                </Link>
-                    </div>
+                    {depflags.Circulos && <div  className="boton__home">
+                        <Link to="/Circulos" onClick={this.onClick}>
+                            <Button name="Circulos(en desarrollo)" />
+                         </Link>
+                    </div>}
             </div>
         )
     }

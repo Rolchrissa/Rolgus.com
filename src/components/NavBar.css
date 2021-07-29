@@ -15,6 +15,7 @@
     color: #ddd;
     font-size: 250%;
     height: 45px;
+    text-decoration: none;
 }
 #navbar i{
     display: flex;    

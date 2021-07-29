@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route , Switch} from 'react-router-dom';
 import './App.js';
 import './App.css'
 import NavBar from './components/NavBar';
@@ -7,21 +7,26 @@ import Home from './components/Home';
 import Portales from './components/Portales';
 import Circulos from './components/Circulos';
 import RestBlocks from './components/RestBlocks.js';
-import Menu from './components/MenuDesp'
-var hola = '';
+import Menu from './components/MenuDesp';
+import Error404 from './pages/Error404';
+
+const menuSylesOff = {
+    top: "-100vh",
+}
+const menuSylesOn = {
+    top: "55px",
+}
+
 class App extends React.Component {
     state = {
-        menu: false
+        menu: false,
+        menuState: menuSylesOff
     }
     setMenu(estado) {
-        // let change = {
-        //     menu: estado
-        // }
-        hola = estado;
-        console.log((hola));
-        console.log((this.state.menu));
+
         this.setState({
-            menu: estado
+            menu: estado,
+            menuState: estado ? menuSylesOn : menuSylesOff
         })
     }
 
@@ -29,36 +34,27 @@ class App extends React.Component {
     render() {
         return (
             <div id="app">
-                <Router>
-                    <NavBar setMenu={this.setMenu.bind(this)} menuState={this.state.menu}/>
-                    {this.state.menu ? <Menu setMenu={this.setMenu.bind(this)}/> : ''}
-                    <Route exact path="/" render={() => {
-                        document.title = "Rolgus | Minecraft";
-                        
-                        return (<Home />);
-                        }}/>
-                    <Route exact path="/Portales" render={() => {
-                        document.title = "Portales | Rolgus";
 
-                        return (<Portales/>)
-                    }} />
-                    <Route exact path="/RestBlocks" render={() => {
-                        document.title = "Distancia | Rolgus";
-                        return (<RestBlocks/>)
-                    }} />
-                    <Route exact path="/Circulos" render={() => {
-                        document.title = "Circulos | Rolgus";
-                        return (<div>
-                            <Circulos />
-                        </div>)
-                    }} />
+                <Router>
+                        <NavBar setMenu={this.setMenu.bind(this)} menuState={this.state.menu}/>
+                        <Menu setMenu={this.setMenu.bind(this)} styles={this.state.menuState }/>
+                        <Switch>
+                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/Portales" component={Portales } />
+                            <Route exact path="/RestBlocks" component={RestBlocks}/>
+                            <Route exact path="/Circulos" component={Circulos}/>
+                            <Route component={Error404}/>
+                    </Switch>
                 </Router>
+
 
             </div>
         );
     }
 
 }
+
+
 
 
 

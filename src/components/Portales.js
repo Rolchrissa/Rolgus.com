@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Calculadora.css';
 import './Portales.css'
 import Boton from './Boton'
+import depflags from '../flags.json'
 
 const errorNumber = {
     borderBottom: "2px solid rgb(177, 0, 0)",
@@ -106,10 +107,10 @@ class Portales extends Component {
                     ></Boton>
                     <Boton click={this.nethToOver}
                         name="Nether  ->  OverWorld"></Boton>
-                    <Boton click={this.saveState}
+                    {depflags.save && <Boton click={this.saveState}
                         name="Guardar"
                         id="save"
-                        styles={{flexBasis: "50%"}}></Boton>
+                        styles={{flexBasis: "50%"}}></Boton>}
                 </div>
                 <div id="calculadora__res">
                     <div className="posRes"> X: {this.state.posDestX}</div>

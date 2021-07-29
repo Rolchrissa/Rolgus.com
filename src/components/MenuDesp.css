@@ -1,14 +1,16 @@
 #menu__responsive-des{
     display: flex;
     position: absolute;
-    height: 94vh;
+    /* height: calc(100vh); */
+    height: calc(100vh - 55px);
     width: 100vw;
     /* top: -94vh; */
-    /* top: 6vh; */
+    top: 55px;
     background: #005c45fa;
-    transition: top 1s; 
     flex-direction: column;
     justify-content:  flex-start;
+    transition: top 1s; 
+    z-index: 1;
 }
 #menu__responsive-des *{
         text-decoration: none;
@@ -32,4 +34,10 @@
 .menu__res-li:active{
     background-color:#009771fa;
     
+}
+
+.menu__res-li-cuenta *{
+    color:blue;
+    align-content: end;
+
 }

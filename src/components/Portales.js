@@ -75,6 +75,8 @@ class Portales extends Component {
         })
     }
     render() {
+        document.title = "Portales | Rolgus";
+
         return (
             <div id="calculadora">
                 <h2 id="calculadora__title">Enlazar Portales</h2>

@@ -85,6 +85,8 @@ export class RestBlocks extends Component {
 
 
     render() {
+        document.title = "Distancia | Rolgus";
+
         return (
             <div id="calculadora">
                 <h2 id="calculadora__title">Diferencias</h2>

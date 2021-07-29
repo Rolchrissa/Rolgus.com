@@ -1,0 +1,15 @@
+.home__home {
+    /* margin-top: 50px; */
+    display:flex;
+    align-self: center;
+    justify-items: center;
+}
+.home__home {
+    margin: auto;
+    align-self: center;
+}
+#home__home{
+    color: #005C45;
+    font-weight: 900;
+    font-size: 200%; 
+}

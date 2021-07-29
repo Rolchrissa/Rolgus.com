@@ -15,7 +15,7 @@ class NavBar extends React.Component {
     render() {
         return (
             <div id="navbar">
-                <img src={rolgusIcon} alt="Rolgus Minecraft Skin Face "/>
+                <a href="https://discord.gg/NKMzAmT4SD " target="_blank"><img src={rolgusIcon} alt="Rolgus Minecraft Skin Face " /></a>
                 <Link to="/">Rolgus</Link>
                 <i className='bx bx-menu' onClick={this.click}></i>
                 

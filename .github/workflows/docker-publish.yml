@@ -1,0 +1,85 @@
+on: push
+name: deploy
+
+jobs:
+  # build-project:
+  #   runs-on: ubuntu-latest
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [16.x]
+
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: Use Node.js ${{ matrix.node-version }}
+  #     uses: actions/setup-node@v2
+  #     with:
+  #       node-version: ${{ matrix.node-version }}
+  #       cache: 'npm'
+  #   - run: npm ci
+  #   - run: npm run build
+  #   # - run: npm run postbuild
+
+  build-and-push:
+    name: Build and push Docker hub image
+    # needs: build-project
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steps:
+      - name: Branch name
+        run: echo running on branch ${GITHUB_REF##*/}
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: push image to docker hub
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_REGISTRY_URL: docker.io
+
+      - name: Build :${{ github.run_number }}
+        if: success()
+        run: docker build -t docker.io/chrisrol/rolgus-toolbox-front:${{ github.run_number }} . --platform linux/arm/v7
+      - name: Push to docker hub :${{ github.run_number }}
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push docker.io/chrisrol/rolgus-toolbox-front:${{ github.run_number }}
+      - name: Build :latest
+        if: success()
+        run: docker build -t docker.io/chrisrol/rolgus-toolbox-front:latest . --platform linux/arm/v7
+
+      - name: Push to docker hub :latest
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push docker.io/chrisrol/rolgus-toolbox-front:latest
+
+  deploy-to-cluster:
+    name: deploy to cluster
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: deploy to cluster
+        uses: steebchen/kubectl@v2.0.0
+        with: # defaults to latest kubectl binary version
+          config: ${{ secrets.KUBE_CONFIG_DATA }}
+          command: set image --record deployment.apps/fat-frontend frontend=chrisrol/rolgus-toolbox-front:${{ github.run_number }} -n rolgus-toolbox
+      - name: verify deployment
+        uses: steebchen/kubectl@v2.0.0
+        with:
+          config: ${{ secrets.KUBE_CONFIG_DATA }}
+          version: v1.22.0 # specify kubectl binary version explicitly
+          command: rollout status deployment.apps/fat-frontend -n rolgus-toolbox
